@@ -3,6 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <cctype>
+#include <sstream>
 
 #include "ArrayStack.h"
 
@@ -19,6 +20,13 @@ struct Token {
 vector<Token> tokenize(const string& line) {
     vector<Token> tokens;
     // TODO
+    istringstream iss(line);
+    string word;
+    while (iss >> word) {
+        Token token;
+        token.value = word;
+        tokens.push_back(token);
+    }
     return tokens;
 }
 
@@ -30,6 +38,8 @@ bool isOperator(const string& s) {
 
 int precedence(const string& op) {
     // TODO
+    if (op=="*"||op=="/") return 2;
+    if (op=="+"||op=="-") return 1;
     return 0;
 }
 
