@@ -47,7 +47,13 @@ int precedence(const string& op) {
 
 bool isValidPostfix(const vector<Token>& tokens) {
     // TODO
+    if (tokens.size()==0)
     return false;
+
+    for (int i=0; i<tokens.size(); i++) {
+        if (tokens[i].value=="(" || tokens[i].value==")")
+            return false;
+    }
 }
 
 bool isValidInfix(const vector<Token>& tokens) {
