@@ -50,10 +50,31 @@ bool isValidPostfix(const vector<Token>& tokens) {
     if (tokens.size()==0)
     return false;
 
-    for (int i=0; i<tokens.size(); i++) {
+    for (int i=0; i<(int)tokens.size(); i++) {
         if (tokens[i].value=="(" || tokens[i].value==")")
             return false;
     }
+    for (int i=0; i<tokens.size(); i++) {
+        string op = tokens[i].value;
+        bool isNum=!op.empty();
+        for (int j=0; j<op.size(); j++) {
+            if (!isdigit(op[j])) {
+                isNum=false; break;
+            }
+        }
+        if (!isNum&& !isOperator(op)) return false;
+    }
+
+        int depth=0;
+        for (int i=0; i<(int)tokens.size(); i++) {
+            if (isOperator(tokens[i].value)) {
+                if (depth<2) return false;
+                depth--;
+            } else{ depth++; }
+        }
+
+        return depth==1;
+
 }
 
 bool isValidInfix(const vector<Token>& tokens) {
