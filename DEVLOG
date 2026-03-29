@@ -1,7 +1,7 @@
 Entry: 1
 Date: 2026-03-28
 Entry type: Bug fix
-Task Worked on: Implementation of isValidInInfix in the main cpp file
+Task Worked on: Implementation of isValidInfix in the main cpp file
 Issue: Checking to see if the token validation check was in the j loop or outside
 of it. Seeing if the check was checking the individual characters of the token or
 after all the characters in the token had been scanned and isNum was being determined
@@ -11,9 +11,26 @@ weren't correct for infix expressions that were valid. It compiled fine but the 
 correct. Valid tokens weren't being accepted, isNum hadn't been finished being determined
 since isNum wasn't fully set until the j loop was done scanning all the characters in the token.
 What I tried: Moving around braces
-Fix: After some time of tracing the program and moving around the brackets, I eventually which part of the
-brackets were misplaced. This allowed the full character scan rather than stopping halfway through and seeing isNum
-before all characters were looked at.
+Fix: After some time of tracing the program and moving around the brackets, I eventually which
+part of the brackets were misplaced. This allowed the full character scan rather than stopping
+halfway through and seeing isNum before all characters were looked at.
+Commits: Fixed the misplaced bracket in isValidInfix
+
+
+Entry: 2
+Date: 2026-03-28
+Entry Type: Bug Fix
+Task Worked on: isValidInfix token check
+Issue: The last token was being compared with ( when it's supposed to being compared to )
+Error message: Online compiler would say that the valid infix expression was
+being classified as neither which isn't supposed to happen.
+What I tried: Changing the parenthesis
+Fix: When the parenthesis was changed from "(" to ")" so that the check would allow the
+number or parenthesis to be the final token,
+Commits: isValidInfix last token fix.
+
+
+
 
 
 

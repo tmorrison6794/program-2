@@ -89,9 +89,37 @@ bool isValidInfix(const vector<Token>& tokens) {
                 isNum=false; break;
             }
         }
-            if (!isNum&& !isOperator(op)&& op !="("&& op !=")") return false;
+        if (!isNum&& !isOperator(op)&& op !="("&& op !=")") return false;
+    }
+    const string& first=tokens[0].value;
+    bool firstIsNum=!first.empty();
+    for (int j=0; j<first.size(); j++) {
+        if (!isdigit(first[j])) {
+            firstIsNum=false; break;
         }
+    }
+    if (!firstIsNum&& first!="(") return false;
+    const string&last=tokens[tokens.size()-1].value;
+    bool lastIsNum=!last.empty();
+    for (int j=0; j<last.size(); j++) {
+        if (!isdigit(last[j])) {
+            lastIsNum=false; break;
+        }
+    }
+    if (!lastIsNum&& last!="(") return false;
 
+
+
+    int balance=0;
+    for (int i=0; i<(int)tokens.size(); i++) {
+        if (tokens[i].value=="(") {
+            balance++;
+        }else if (tokens[i].value==")") {
+                balance--;
+                if (balance<0) return false;
+            }
+        }
+        if (balance!=0) return false;
     return true;
 }
 
