@@ -50,7 +50,7 @@ bool isValidPostfix(const vector<Token>& tokens) {
     if (tokens.size()==0)
     return false;
 
-    for (int i=0; i<(int)tokens.size(); i++) {
+    for (int i=0; i<tokens.size(); i++) {
         if (tokens[i].value=="(" || tokens[i].value==")")
             return false;
     }
@@ -66,7 +66,7 @@ bool isValidPostfix(const vector<Token>& tokens) {
     }
 
         int depth=0;
-        for (int i=0; i<(int)tokens.size(); i++) {
+        for (int i=0; i<tokens.size(); i++) {
             if (isOperator(tokens[i].value)) {
                 if (depth<2) return false;
                 depth--;
@@ -81,7 +81,7 @@ bool isValidInfix(const vector<Token>& tokens) {
     // TODO
     if (tokens.size()==0)
         return false;
-    for (int i=0; i<(int)tokens.size(); i++) {
+    for (int i=0; i<tokens.size(); i++) {
         string op = tokens[i].value;
         bool isNum=!op.empty();
         for (int j=0; j<op.size(); j++) {
@@ -106,12 +106,32 @@ bool isValidInfix(const vector<Token>& tokens) {
             lastIsNum=false; break;
         }
     }
-    if (!lastIsNum&& last!="(") return false;
-
-
+    if (!lastIsNum&& last!=")") return false;
+    for (int i=0; i<tokens.size()-1; i++) {
+        const string& cur = tokens[i].value;
+        const string& next=tokens[i+1].value;
+        bool curIsNum=!cur.empty();
+        for (int j=0; j<cur.size(); j++) {
+            if (!isdigit(cur[j])) {
+                curIsNum=false; break;
+            }
+        }
+        bool nextIsNum=!next.empty();
+        for (int j=0; j<next.size(); j++) {
+            if (!isdigit(next[j])) {
+                nextIsNum=false; break;
+            }
+        }
+        if (curIsNum||cur==")") {
+            if (!isOperator(next)&&next!=")") return false;
+        }
+        if (isOperator(cur)||cur=="(") {
+            if (!nextIsNum&& next!="(") return false;
+        }
+    }
 
     int balance=0;
-    for (int i=0; i<(int)tokens.size(); i++) {
+    for (int i=0; i<tokens.size(); i++) {
         if (tokens[i].value=="(") {
             balance++;
         }else if (tokens[i].value==")") {

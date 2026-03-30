@@ -29,6 +29,31 @@ Fix: When the parenthesis was changed from "(" to ")" so that the check would al
 number or parenthesis to be the final token,
 Commits: isValidInfix last token fix.
 
+Entry: 3
+Date: 2026-03-30
+Entry Type: Engineering Decision
+Task Worked On: ArrayStack.h
+Issue/Decision: How to respond to pop() and top().
+Alternative Approach: Tried having the output give a error message and terminate the
+program.
+Fix: Use throw std::runtime_error so that empty stack access is shown clearly
+without having the entire program to exit.
+Commits: Empty stack error
+
+Entry: 4
+Entry type: Bug fix
+Task worked on: top() method in ArrayStack
+Issue: top() was coming back with data[0] which is the bottom of the stack when it
+should be the top.
+Error message: The stack operations weren't giving the correct values since the
+bottom element was the one that was being read when it should have been than the
+one that was just pushed.
+What I tried: Indexing a vector using data[0]
+Fix: Changed data[0] to data.back() so the last element that was pushed was returned.
+Commits: Fixing top() in ArrayStack
+
+
+
 
 
 
