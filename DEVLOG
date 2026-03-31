@@ -67,14 +67,16 @@ give a correct answer. Double division would give us better answers would keep t
 throughout the operations done.
 Commits: Used ArrayStack<double> and stod() for the use of double division.
 
-
-
-
-
-
-
-
-
-
-
-
+Entry: 6
+Entry type: Bug Fix
+Task worked on: inFixToPostfix implemented into main.cpp
+Issue: The while loop wasn't using the correct token to be used as the output vector
+Error message: There wasn't an error message but the postfix wasn't giving the right output.
+The token at the time was cloned instead of the the operator being taken from the stack.
+What I tried: At first I put output.push_back(tokens[i]) since it was talking about the current
+operator being used since tokens[i] was the operator that got triggered in the while loop.
+Fix: Changed it to output.push_back({opStack.top()}) in order to have the operator on top of the
+stack that is added to the output. This made the while loop drain higher precedence operators
+off the stack in order to have opStack.top() be the right value to output.
+Commits: Fixed token push in the while loop of infixToPostfix so I could use opStack.top() rather
+than tokens[i].
