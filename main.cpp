@@ -149,6 +149,28 @@ bool isValidInfix(const vector<Token>& tokens) {
 vector<Token> infixToPostfix(const vector<Token>& tokens) {
     vector<Token> output;
     // TODO
+    ArrayStack<string> opStack;
+    for (int i=0; i<tokens.size(); i++) {
+        const string& op = tokens[i].value;
+        bool isNum=!op.empty();
+        for (int j=0; j<op.size(); j++) {
+            if (!isdigit(op[j])) {
+                isNum=false; break;
+            }
+            }
+            if (isNum) {
+                output.push_back(tokens[i]);
+            } else if (isOperator(op)) {
+                while (!opStack.empty()) && isOperator(opStack.top())
+                &&precedence((opStack.top())) >= precedence(opStack.top()) {
+                    output.push_back(tokens[i]);
+                    opStack.pop();
+                }
+                opStack.push(op);
+            } else if (val=="(")
+
+        }
+    }
     return output;
 }
 
