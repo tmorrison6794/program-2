@@ -41,6 +41,7 @@ without having the entire program to exit.
 Commits: Empty stack error
 
 Entry: 4
+Date: 2026-03-30
 Entry type: Bug fix
 Task worked on: top() method in ArrayStack
 Issue: top() was coming back with data[0] which is the bottom of the stack when it
@@ -53,6 +54,7 @@ Fix: Changed data[0] to data.back() so the last element that was pushed was retu
 Commits: Fixing top() in ArrayStack
 
 Entry: 5
+Date: 2026-03-31
 Entry Type: Engineering Decision
 Task Worked On: Implementation of evalPostFix in main.cpp
 Decision/Issue: Wasn't sure to either choose integer division or double division using
@@ -68,6 +70,7 @@ throughout the operations done.
 Commits: Used ArrayStack<double> and stod() for the use of double division.
 
 Entry: 6
+Date: 2026-03-31
 Entry type: Bug Fix
 Task worked on: inFixToPostfix implemented into main.cpp
 Issue: The while loop wasn't using the correct token to be used as the output vector
