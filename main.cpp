@@ -157,19 +157,29 @@ vector<Token> infixToPostfix(const vector<Token>& tokens) {
             if (!isdigit(op[j])) {
                 isNum=false; break;
             }
-            }
-            if (isNum) {
-                output.push_back(tokens[i]);
-            } else if (isOperator(op)) {
-                while (!opStack.empty()) && isOperator(opStack.top())
-                &&precedence((opStack.top())) >= precedence(opStack.top()) {
-                    output.push_back(tokens[i]);
-                    opStack.pop();
-                }
-                opStack.push(op);
-            } else if (val=="(")
-
         }
+        if (isNum) {
+            output.push_back(tokens[i]);
+        } else if (isOperator(op)) {
+            while (!opStack.empty() && isOperator(opStack.top())
+            &&precedence((opStack.top())) >= precedence (op)){
+                output.push_back({opStack.top()});
+                opStack.pop();
+            }
+            opStack.push(op);
+        } else if (op=="("){
+            opStack.push(op);
+    }else if (op==")"){
+        while (!opStack.empty() && opStack.top()!="(") {
+            output.push_back({opStack.top()});
+            opStack.pop();
+        }
+        if (!opStack.empty()) opStack.pop();
+        }
+    }
+    while (!opStack.empty()) {
+        output.push_back({opStack.top()});
+        opStack.pop();
     }
     return output;
 }
@@ -179,7 +189,31 @@ vector<Token> infixToPostfix(const vector<Token>& tokens) {
 double evalPostfix(const vector<Token>& tokens) {
     ArrayStack<double> stack;
     // TODO
-    return 0.0;
+    for (int i=0; i<tokens.size(); i++) {
+        const string& op = tokens[i].value;
+        bool isNum=!op.empty();
+        for (int j=0; j<op.size(); j++) {
+            if (!isdigit(op[j])) {
+                isNum=false; break;
+            }
+        }
+        if (isNum) {
+            stack.push(stod(op));
+        }else if (isOperator(op)) {
+            double b=stack.top();
+            stack.pop();
+            double a=stack.top();
+            stack.pop();
+            if (op=="+") stack.push(a+b);
+            else if (op=="-")
+            stack.push(a-b);
+            else if (op=="*")
+                stack.push(a*b);
+            else if (op=="/")
+                stack.push(a/b);
+        }
+    }
+    return stack.top();
 }
 
 // Main
