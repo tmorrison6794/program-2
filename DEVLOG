@@ -52,6 +52,25 @@ What I tried: Indexing a vector using data[0]
 Fix: Changed data[0] to data.back() so the last element that was pushed was returned.
 Commits: Fixing top() in ArrayStack
 
+Entry: 5
+Entry Type: Engineering Decision
+Task Worked On: Implementation of evalPostFix in main.cpp
+Decision/Issue: Wasn't sure to either choose integer division or double division using
+the "/" operator
+Alternative Approach: Integer division would give me 3 when dividing 7/2 rather than 3.5.
+Double division would be better for accuracy.
+Fix/Resolution: Used double division since it would give more accurate results. Using
+ArrayStack<double> and stod(op) makes sure that the decimals are exact. If I used integer
+division, like I said, dividing 7/2 would push 3 onto the stack rather than 3.5 which wouldn't
+be as accurate. Since the order of popping matters too, b would be popped before a so that a/b could
+give a correct answer. Double division would give us better answers would keep the correct decimals
+throughout the operations done.
+Commits: Used ArrayStack<double> and stod() for the use of double division.
+
+
+
+
+
 
 
 
